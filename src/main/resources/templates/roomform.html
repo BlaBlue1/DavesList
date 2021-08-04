@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<br>
+<div th:class="container">
+    <form th:action="@{/displayRoom}" th:object="${room}" method="post">
+        ID: <input type="number" th:field="*{id}"><br>
+        <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span><br>
+        Address:<input type="text" th:field="*{address}"><br>
+        <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span><br>
+        City:<input type="text" th:field="*{city}"><br>
+        <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span><br>
+        State:<input type="text" th:field="*{state}"><br>
+        <span th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></span><br>
+        Price:<input type="number" th:field="*{price}"><br>
+        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span><br>
+        Description:<input type="text" th:field="*{description}"><br>
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br>
+        Rules:<input type="text" th:field="*{rules}"><br>
+        <span th:if="${#fields.hasErrors('rules')}" th:errors="*{rules}"></span><br>
+
+        Wifi:
+        <select th:field="*{wifi}">
+            <option value="true" th:text="Yes"></option>
+            <option value="false" th:text="No"></option>
+        </select>
+        <br>
+        Cable:
+        <input type="checkbox" id="none" th:field="*{cable}" th:value="none">
+        <label for="none">None</label>
+        <input type="checkbox" id="basic" th:field="*{cable}" th:value="basic">
+        <label for="basic">Basic</label>
+        <input type="checkbox" id="premium" th:field="*{cable}" th:value="premium">
+        <label for="premium">Premium</label><br>
+
+        Private Bathroom:
+        <input type="checkbox" id="yes" th:field="*{privateBathroom}" th:value="yes">
+        <label for="yes">Yes</label>
+        <input type="checkbox" id="no" th:field="*{privateBathroom}" th:value="no">
+        <label for="yes">No</label><br>
+
+        Rented
+        <input type="checkbox" id="yes" th:field="*{isRented}" th:value="yes">
+        <label for="yes">Yes</label>
+        <input type="checkbox" id="no" th:field="*{isRented}" th:value="no">
+        <label for="yes">No</label><br>
+        <span th:if="${#fields.hasErrors('isRented')}" th:errors="*{isRented}"></span>
+        <br>
+        <input type="submit" value="Enter">
+    </form>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
