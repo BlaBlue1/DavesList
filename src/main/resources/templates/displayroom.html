@@ -8,8 +8,7 @@
 </head>
 <body>
 <div th:class="container">
-    <div th:if="${room.isRented}">
-        <p>This room is rented </p>
+    <div th:if="${room.isRented}"><p th:inline="text">This room is rented </p>
     </div>
     <div th:unless="${room.isRented}">
         <p th:inline="text">ID: [[${room.id}]]</p>

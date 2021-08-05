@@ -9,7 +9,7 @@
 <body>
 
 <div th:class="container">
-    <table th:if="${rooms.size()} > 0">
+    <table style="width:100%" th:if="${rooms.size()} > 0">
         <tr>
             <th>Id</th>
             <th>Address</th>
@@ -21,8 +21,7 @@
             <th>Wifi</th>
             <th>Cable</th>
             <th>Private Bathroom</th>
-            <th>Status</th>
-
+            <th>Rented</th>
         </tr>
         <tr th:each="room: ${rooms}">
             <td th:text="${room.id}"/>
@@ -40,8 +39,8 @@
             <td>
                 <a th:href="@{/update/{id} (id=${room.id})}">Update</a> -
                 <a th:href="@{/add/{id} (id=${room.id})}">Add</a> -
-            </td>
 
+            </td>
         </tr>
     </table>
 </div>

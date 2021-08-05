@@ -27,8 +27,8 @@
 
         Wifi:
         <select th:field="*{wifi}">
-            <option value="true" th:text="Yes"></option>
-            <option value="false" th:text="No"></option>
+            <option value="yes" th:text="Yes"></option>
+            <option value="no" th:text="No"></option>
         </select>
         <br>
         Cable:
@@ -47,9 +47,9 @@
 
         Rented
         <input type="checkbox" id="yes" th:field="*{isRented}" th:value="yes">
-        <label for="yes">Yes</label>
+        <label for="yes"></label>
         <input type="checkbox" id="no" th:field="*{isRented}" th:value="no">
-        <label for="yes">No</label><br>
+        <label for="no"></label><br>
         <span th:if="${#fields.hasErrors('isRented')}" th:errors="*{isRented}"></span>
         <br>
         <input type="submit" value="Enter">

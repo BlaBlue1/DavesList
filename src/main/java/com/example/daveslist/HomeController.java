@@ -1,5 +1,6 @@
 package com.example.daveslist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,9 @@ public class HomeController {
 
     ArrayList<Room> rooms = new ArrayList<>();
 
+    @Autowired
+    UserRepository userRepository;
+
 
     @RequestMapping("/")
     public String index() {
@@ -28,9 +32,9 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping("/admin")
-    public String admin() {
-        return "admin";
+    @PostMapping("/logout")
+    public String logout(){
+        return "redirect:/login?logout=true";
     }
 
     @GetMapping("/roomForm")
@@ -42,19 +46,30 @@ public class HomeController {
     @PostMapping("/displayRoom")
     public String displayRoom(@Valid Room room, BindingResult result){
         if (result.hasErrors()){
-            System.out.println("There was error");
             return "roomform";
         }else {
             rooms.add(room);
-            System.out.println("There was no error");
             return "displayroom";
         }
     }
+
     @RequestMapping("/allRooms")
     public String showAll(Model model){
         model.addAttribute("rooms", rooms);
         return "allrooms";
     }
+    @RequestMapping("/add/{id}")
+    public String addRoom(@PathVariable("id") long id, Model model) {
+        for(Room room: rooms){
+            if(id == room.getId()){
+                model.addAttribute("room",room);
+                break;
+            }
+        }
+        return "roomform";
+    }
+
+
     @RequestMapping("/update/{id}")
     public String updateRoom(@PathVariable("id") long id, Model model){
         for(Room room: rooms){

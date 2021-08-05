@@ -16,11 +16,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                .antMatchers("/admin")
+        httpSecurity.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/roomForm", "/allRoom")
                 .hasRole("ADMIN")
-                .antMatchers("/user")
-                .hasRole("USER")
+                .antMatchers("/update/**", "/add/**")
+                .hasRole("ADMIN")
                 .antMatchers("/**").hasAnyRole("ADMIN","USER")
                 .and()
                 .formLogin()
@@ -42,13 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .withDefaultSchema()
-                .withUser("DaveWolf")
-                .password(passwordEncoder().encode("beastmaster"))
-                .roles("ADMIN", "USER")
-                .and()
-                .withUser("user")
-                .password(passwordEncoder().encode("user"))
-                .roles("USER");
+                .usersByUsernameQuery("select username, password, enabled from" + " user_table where username=?")
+                .authoritiesByUsernameQuery("select username, role from role_table " + " where username=?");
+
     }
 }

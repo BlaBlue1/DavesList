@@ -7,10 +7,11 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+<h1>Login Page</h1>
 <div th:class="container">
-    <div th:if="${param.error}">
-        Invalid username or password
-    </div><br>
+    <div th:if="${param.error}">Invalid username or password</div><br>
+    <div th:if="${param.logout}">You have been successfully logged out</div>
+
     <form th:action="@{/login}" method="post">
         <div>
             <label>Username:<input type="text" name="username"/></label>
